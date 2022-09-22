@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>helloword</h1>
+<a th:href="@{/hello}">测试@RequestMapping注解所标识的位置</a><br>
+<a th:href="@{/abc}">测试@RequestMapping注解的value属性</a>
+
+<form th:action="@{/test/abc}" method="post">
+    用户名：<input type="text" name="username"><br>
+    密码：<input type="password" name="password"><br>
+    <input type="submit" value="登录"><br>
+</form>
+
+<a th:href="@{/hello?username=admin}">测试@RequestMapping注解的params属性</a> <br>
+<a th:href="@{/hello(username='admin')}">测试@RequestMapping注解的params属性</a>
+
+<hr>
+<br>
+
+<a th:href="@{/aba/test/ant}">测试@RequestMapping注解支持ant风格的路径</a> <br><br>
+
+<a th:href="@{/test/rest/1}">测试@RequestMapping注解的value属性中的占位符</a> <br><br>
+
+
+<hr color="red" th:border="5px">
+<br><br><br><br>
+
+<a th:href="@{/testRest/1/admin}">测试路径中的占位符-->/testRest</a>
+<br>
+
+<a th:href="@{/login}">login</a>
+
+
+<hr color="yellow" th:border="10px">
+<br>
+
+<a th:href="@{/test/mav}">测试通过ModelAndView向请求域共享数据</a> <br>
+<a th:href="@{/test/model}">测试通过model向请求域共享数据</a> <br>
+<a th:href="@{/test/modelMap}">测试通过modelmap向请求域共享数据</a> <br>
+<a th:href="@{/test/map}">测试通过map向请求域共享数据</a> <br>
+
+<!---->
+<br><br>
+<a th:href="@{/test/session}">测试向会话域session共享数据</a> <br>
+<a th:href="@{/test/application}">测试通向应用域application共享数据</a> <br>
+
+
+<hr color="blue" th:border="10px">
+<br><br>
+<a th:href="@{/test/view/thymeleaf}">测试SpringMVC的视图ThymeleafView</a> <br><br>
+<a th:href="@{/test/view/forward}">测试SpringMVC的视图InternalResourceView</a> <br><br>
+<a th:href="@{/test/view/redirect}">测试SpringMVC的视图RedirectView</a> <br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

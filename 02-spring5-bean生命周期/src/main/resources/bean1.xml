@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        bean的生命周期:
+            1.调用bean的无参构造方法实例化
+            2.调用属性的set方法给属性赋值 以及对其它bean的引用
+                第二步之后初始化之前执行的方法
+            3.调用bean的初始化方法
+                初始化之后执行的方法
+            4.bean可以使用了
+            5.bean消亡
+    -->
+    <!--init-method配置初始化方法-->
+    <!--destroy-method配置销毁的方法-->
+    <!--
+        设置单实例还是多实例 scope
+        singleton 单实例(默认)  加载配置的时候不会创建对象
+        prototype 多实例       加载配置的时候会创建对象
+    -->
+    <bean id="orders" class="com.hu.spring.bean.Orders" init-method="initMethod" scope="singleton" destroy-method="destroyMethod">
+        <property name="oname" value="手机"/>
+    </bean>
+
+    <!--配置后置处理器-->
+    <bean id="myBean" class="com.hu.spring.bean.MyBean"/>
+</beans>

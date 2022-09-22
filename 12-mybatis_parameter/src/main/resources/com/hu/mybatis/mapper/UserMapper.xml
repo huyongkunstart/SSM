@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hu.mybatis.mapper.UserMapper">
+
+    <!--
+        Mybatis获取参数值的两种方法 #{} ${}
+        #{} 本质是占位符赋值 ${} 本质是字符串拼接
+        1.若mapper接口方法的参数为单个字面量类型
+            #{}和${}里面写任意字符都可以获取参数值
+        2.若mapper接口方法的参数为多个字面量类型
+            此时mybatis会将参数放到map集合中，以两种方式存储数据
+            （1）以arg0，arg1，，，为键，以参数为值
+            （2）以param1,param2，，，为键，以参数为值
+        3.若mapper接口方法的参数为map集合类型的参数
+            只需通过#{}/${}访问map的键，就可以获取值
+        4.若mapper接口方法的参数为实体类类型的参数
+            只需要通过#{} / ${}访问实体类中的属性名，就可以获取相对应的属性值
+        5.可以在mapper接口的方法上设置@Param注解
+            此时Mybatis会将这些参数放在map中，以两种方式进行存储
+            （1）以@Param注解的value属性值为键，以参数为值
+            （2）以param1，param2，，，为键，以参数为值
+    -->
+   <!--getUserByUsername(String username)-->
+    <select id="getUserByUsername" resultType="User">
+        select * from t_user where username = #{username}
+        <!--字符串拼接方法-->
+        <!-- select * from t_user where username = '${username}' -->
+    </select>
+
+    <!--User checkLogin(String username,String password);-->
+    <select id="checkLogin" resultType="User">
+        <!--[arg1, arg0, param1, param2]-->
+        select * from t_user where username = #{arg0}  and password = #{arg1}
+    </select>
+
+    <!--User checkLoginByMap(Map<String,Object> map);-->
+    <select id="checkLoginByMap" resultType="User">
+        select * from t_user where username = #{username} and password = #{password}
+    </select>
+
+    <!--void insertUser(User user);-->
+    <insert id="insertUser">
+        insert into t_user values(null ,#{username},#{password},#{age},#{gender},#{email})
+    </insert>
+
+    <!--User checkLoginByParam(@Param("username")String username, @Param("password")String password);
+    -->
+    <select id="checkLoginByParam" resultType="User">
+        select * from t_user where username = #{username} and password = #{password}
+    </select>
+
+</mapper>
