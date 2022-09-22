@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+">
+
+    <!--注入数组，list，集合类型的属性-->
+    <bean id="stu" class="com.hu.spring.demo2.Stu">
+        <!--数组注入-->
+        <property name="courses">
+            <array>
+                <value>张三</value>
+                <value>李四</value>
+            </array>
+        </property>
+
+        <!--list集合的值是对象的注入方式-->
+        <property name="list">
+            <list>
+                <ref bean="course1"/>
+                <ref bean="course2"/>
+            </list>
+        </property>
+        <!--list集合的值是普通值的注入方式-->
+       <!--
+         <property name="list">
+            <list>
+                <value>asdf</value>
+                <value>gdfgd</value>
+            </list>
+        </property>
+       -->
+
+        <!--map集合注入-->
+        <property name="maps">
+            <map>
+                <entry key="王五" value="19"/>
+                <entry key="六二" value="21"/>
+            </map>
+        </property>
+        <!--set集合注入-->
+        <property name="sets">
+            <set>
+                <value>中国</value>
+                <value>日本</value>
+            </set>
+        </property>
+    </bean>
+
+
+
+
+    <!--在集合里面设置对象类型值-->
+    <bean id="course1" class="com.hu.spring.demo2.Course">
+        <property name="cname" value="Spring5框架"/>
+    </bean>
+
+    <bean id="course2" class="com.hu.spring.demo2.Course">
+        <property name="cname" value="MyBatis框架"/>
+    </bean>
+
+
+
+
+    <!--使用util标签完成 list集合注入提取-->
+    <util:list id="bookList">
+        <value>易筋经</value>
+        <value>asdasd</value>
+        <value>奥斯卡了</value>
+    </util:list>
+
+    <bean id="book" class="com.hu.spring.demo2.Book">
+        <property name="list" ref="bookList"/>
+    </bean>
+
+</beans>

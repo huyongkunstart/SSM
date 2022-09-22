@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                                    http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/util
+                                    http://www.springframework.org/schema/util/spring-util.xsd
+">
+
+
+
+    <!--xml方式创建对象-->
+    <bean id="book" class="com.hu.beans.Book">
+        <!--注入普通的属性 使用的是set方法-->
+        <property name="banName" value="《三体》"/>
+        <property name="banAuthor" value="霍金"/>
+    </bean>
+
+    <!--使用有参构造方法创建对象-->
+    <bean id="order" class="com.hu.beans.Orders">
+        <constructor-arg name="name" value="联想"/>
+        <constructor-arg name="address" value="china"/>
+    </bean>
+
+    <!--使用p标签-->
+    <bean id="book1" class="com.hu.beans.Book" p:banName="三体" p:banAuthor="霍金">
+    </bean>
+
+    <!--注入null值和特殊的属性-->
+    <bean id="book2" class="com.hu.beans.Book">
+        <property name="banName">
+            <null/>
+        </property>
+        <property name="banAuthor" value="<![CDATA][<<南京>>]>"/>
+    </bean>
+
+    <!--属性是自定义的类-->
+    <!--方式1-->
+    <bean id="emp" class="com.hu.beans.Emp">
+        <property name="ename" value="asd"/>
+        <property name="gender"><null/></property>
+        <property name="dept" ref="dept"/>
+    </bean>
+    <bean id="dept" class="com.hu.beans.Dept" p:dname="东方闪电">
+    </bean>
+
+    <!--方式2-->
+    <bean id="emp1" class="com.hu.beans.Emp">
+        <property name="gender" value="qwew"/>
+        <property name="ename" value="ere"/>
+        <property name="dept">
+            <bean id="dept2" class="com.hu.beans.Dept"></bean>
+        </property>
+    </bean>
+
+    <!--方式3-->
+    <bean id="emp2" class="com.hu.beans.Emp">
+        <property name="ename" value="asd"/>
+        <property name="gender" value="asdfd"/>
+        <property name="dept" ref="dept3"/>
+        <property name="dept.dname" value="asdasdasd"/>
+    </bean>
+    <bean id="dept3" class="com.hu.beans.Dept">
+        <property name="dname" value="124324"/>
+    </bean>
+
+
+    <!--属性类型是一个集合的情况-->
+    <!--方式1-->
+    <bean id="jihe" class="com.hu.beans.集合">
+        <!--数组注入-->
+        <property name="array">
+            <array>
+                <value>qwe</value>
+                <value>asd</value>
+                <value>zxc</value>
+            </array>
+        </property>
+
+        <!--list集合注入  arraylist用array -->
+        <property name="list">
+            <array>
+                <value>qwe</value>
+                <value>asd</value>
+                <value>zxc</value>
+            </array>
+        </property>
+      <!--存放是对象的情况-->
+<!--        <property name="objectList">-->
+<!--            <list>-->
+<!--                <ref bean="dept3"/>-->
+<!--                <ref bean="dept"/>-->
+<!--            </list>-->
+<!--        </property>-->
+        <!--使用util标签-->
+            <property name="objectList" ref="list123"/>
+        <!--set集合-->
+        <property name="set">
+            <set>
+                <value>123123</value>
+                <value>sdfsdf</value>
+                <value>1sdft3</value>
+            </set>
+        </property>
+
+        <!--hashmap集合-->
+        <property name="map">
+            <map>
+                <entry key="qwe" value="123"/>
+                <entry key="asd" value="345"/>
+            </map>
+        </property>
+
+    </bean>
+
+    <!--方式2 使用util标签-->
+    <!--使用util完成list集合注入 只是设置好了，还需要别人引用-->
+    <util:list id="list123">
+        <value>qwe</value>
+        <value>123</value>
+        <value>dfg</value>
+    </util:list>
+
+
+
+</beans>
